@@ -10,7 +10,7 @@ if (!apiKey || !apiSecret) {
 
 // with the help of apikey and apisecret we can communicate 
 // with stream this is same as we were creating a connectDB in db.js
-const streamClient = StreamChat.getInstance(apiKey, apiSecret);
+const streamClient = StreamChat.getInstance(apiKey, apiSecret); //to communicate with Stream’s servers
 
 export const upsertStreamUser = async (userData) => {
   try {

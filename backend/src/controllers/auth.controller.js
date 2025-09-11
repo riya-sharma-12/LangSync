@@ -31,6 +31,7 @@ export async function signup(req, res) {
       return res.status(400).json({ message: "Email already exists, please use a diffrent one" });
     }
 
+    // gives each new user a random profile picture
     const idx = Math.floor(Math.random() * 100) + 1; // 1..100
     const randomAvatar = `https://api.dicebear.com/9.x/identicon/svg?seed=${idx}`;
 
@@ -124,6 +125,8 @@ export function logout(req, res) {
   res.clearCookie("jwt");
   res.status(200).json({ success: true, message: "Logout successful" });
 }
+
+//Onboard - after signup, the user fills extra details (name, bio, languages, location, etc.)
 
 export async function onboard(req, res) {
   try {

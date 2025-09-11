@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    isOnboarded: {
+    isOnboarded: {  //boolean flag to check if user finished onboarding flow
       type: Boolean,
       default: false,
     },
@@ -56,9 +56,9 @@ const userSchema = new mongoose.Schema(
 
 
 // we will try hashing the user passwords before pushing them into the database 
-// because if someone will hack out database then he may gets access to users passwords
+// because if someone will hack out database then he may get access to users passwords
 userSchema.pre("save", async function (next) {
-    // if the current user passwrod is not modified don't hash it
+    // if the current user password is not modified don't hash it
   if (!this.isModified("password")) return next();
 
   try {

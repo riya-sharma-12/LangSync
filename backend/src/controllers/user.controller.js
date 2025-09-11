@@ -51,7 +51,7 @@ export async function getMyFriends(req, res) {
 export async function sendFriendRequest(req, res) {
   try {
     const myId = req.user.id;
-    const { id: recipientId } = req.params;
+    const { id: recipientId } = req.params; //object destructuring
 
     // prevent sending req to yourself
     if (myId === recipientId) {
@@ -82,11 +82,11 @@ export async function sendFriendRequest(req, res) {
         .json({ message: "A friend request already exists between you and this user" });
     }
 
-    const friendRequest = await FriendRequest.create({
+    const friendRequest = await FriendRequest.create({  //inserts a new document into the FriendRequest collection
       sender: myId,
       recipient: recipientId,
     });
-
+//Sends the newly created friend request object as JSON to the client.
     res.status(201).json(friendRequest);
   } catch (error) {
     console.error("Error in sendFriendRequest controller", error.message);

@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
+//This middleware protects routes so that only authenticated users can access them.
 export const protectRoute = async (req, res, next) => {
   try {
     // we have imported cookie parser in server.js
@@ -35,7 +36,7 @@ export const protectRoute = async (req, res, next) => {
     // about the logged-in user.
     req.user = user;
 
-    next();
+    next(); //Without next(), the request would stop here, and the route would never run.
   } catch (error) {
     console.log("Error in protectRoute middleware", error);
     res.status(500).json({ message: "Internal Server Error" });

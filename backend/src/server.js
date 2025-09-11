@@ -2,8 +2,8 @@ import express from "express";
 
 // dtenv is imported to read env files
 import "dotenv/config";
-import cookieParser from "cookie-parser";
-import cors from "cors";
+import cookieParser from "cookie-parser"; //Read cookies sent by the client.
+import cors from "cors"; //Allow your frontend (different origin) to make requests to your backend.
 // for deployment
 import path from "path";
 
@@ -25,6 +25,7 @@ app.use(
   })
 );
 
+//Without express.json(), your server cannot read JSON data sent by the client.
 app.use(express.json());
 app.use(cookieParser());
 

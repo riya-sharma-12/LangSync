@@ -13,5 +13,11 @@ const useLogin = () => {
 
   return { error, isPending, loginMutation: mutate };
 };
-
 export default useLogin;
+
+// mutationFn: login -> when you call this mutation, it runs your login API function.
+// onSuccess -> after a successful login, it tells React Query to invalidate the cached ["authUser"] query.
+// This forces useAuthUser (the other hook) to re-fetch the logged-in user.
+// mutate -> the function you call to trigger the login.
+// isPending -> true while the login request is ongoing.
+// error -> holds any error if login fails.
