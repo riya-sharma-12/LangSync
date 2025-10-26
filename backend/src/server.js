@@ -11,12 +11,14 @@ import { connectDB } from "./lib/db.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
 app.options("*", cors());
+
 // CORS configuration for production
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  process.env.FRONTEND_URL, // We'll set this in Render environment variables
+  process.env.FRONTEND_URL, // Set this in Render environment variables
 ].filter(Boolean);
 
 app.use(
@@ -28,12 +30,13 @@ app.use(
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        console.error("🚫 CORS blocked origin:", origin);
         callback(new Error('Not allowed by CORS'));
       }
     },
     credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // allow all methods
-  allowedHeaders: ["Content-Type", "Authorization"],  
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ← Fixed: moved outside origin function
+    allowedHeaders: ["Content-Type", "Authorization"], // ← Fixed: moved outside origin function
   })
 );
 
