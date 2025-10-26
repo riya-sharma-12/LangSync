@@ -12,8 +12,6 @@ import { connectDB } from "./lib/db.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.options("*", cors());
-
 // CORS configuration for production
 const allowedOrigins = [
   "http://localhost:5173",
@@ -39,7 +37,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"], // ← Fixed: moved outside origin function
   })
 );
-
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
