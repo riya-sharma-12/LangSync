@@ -11,7 +11,7 @@ import { connectDB } from "./lib/db.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+app.options("*", cors());
 // CORS configuration for production
 const allowedOrigins = [
   "http://localhost:5173",
@@ -32,6 +32,8 @@ app.use(
       }
     },
     credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // allow all methods
+  allowedHeaders: ["Content-Type", "Authorization"],  
   })
 );
 
