@@ -37,7 +37,6 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"], // ← Fixed: moved outside origin function
   })
 );
-app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
