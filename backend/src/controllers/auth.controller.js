@@ -124,10 +124,14 @@ export async function login(req, res) {
 // So next time the user makes a request, there's no token to verify, 
 // meaning they’re effectively logged out.
 export function logout(req, res) {
-  res.clearCookie("jwt");
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    path: "/",
+  });
   res.status(200).json({ success: true, message: "Logout successful" });
 }
-
 //Onboard - after signup, the user fills extra details (name, bio, languages, location, etc.)
 
 export async function onboard(req, res) {
